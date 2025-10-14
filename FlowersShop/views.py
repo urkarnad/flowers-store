@@ -1,12 +1,14 @@
-from django.http import Http404
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from Users.permissions import IsAdminOrReadOnly
 from FlowersShop.serializers import *
 
 
 class FlowersList(APIView):
+    permission_classes = [IsAdminOrReadOnly]
+
     def get(self, request):
         flowers = Flower.objects.all()
         serializer = FlowerSerializer(flowers, many=True)
@@ -21,6 +23,8 @@ class FlowersList(APIView):
 
 
 class FlowersDetail(APIView):
+    permission_classes = [IsAdminOrReadOnly]
+
     def get(self, request, pk):
         try:
             flower = Flower.objects.get(pk=pk)
@@ -50,6 +54,8 @@ class FlowersDetail(APIView):
 
 
 class CategoryList(APIView):
+    permission_classes = [IsAdminOrReadOnly]
+
     def get(self, request):
         categories = Category.objects.all()
         serializer = CategorySerializer(categories, many=True)
@@ -63,6 +69,8 @@ class CategoryList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class CategoryDetail(APIView):
+    permission_classes = [IsAdminOrReadOnly]
+
     def get(self, request, pk):
         try:
             category = Category.objects.get(pk=pk)
@@ -85,6 +93,8 @@ class CategoryDetail(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 class SupplierList(APIView):
+    permission_classes = [IsAdminOrReadOnly]
+
     def get(self, request):
         suppliers = Supplier.objects.all()
         serializer = SupplierSerializer(suppliers, many=True)
@@ -98,6 +108,8 @@ class SupplierList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class SupplierDetail(APIView):
+    permission_classes = [IsAdminOrReadOnly]
+
     def get(self, request, pk):
         try:
             supplier = Supplier.objects.get(pk=pk)

@@ -13,8 +13,8 @@ class SupplierSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class FlowerSerializer(serializers.ModelSerializer):
-    category = CategorySerializer(read_only=True)
-    supplier = SupplierSerializer(read_only=True)
+    # category = CategorySerializer(read_only=True)
+    # supplier = SupplierSerializer(read_only=True)
 
     class Meta:
         model = Flower
