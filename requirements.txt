@@ -1,0 +1,5 @@
+Python 3.10+
+Django 4+
+Django REST Framework
+django-rest-framework-simplejwt
+django-cors-headers

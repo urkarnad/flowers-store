@@ -2,7 +2,7 @@
 
 
 ## Description
-This is an web application for an online flower shop of my mother. 
+This is a web application for an online flower shop of my mother. 
 
 The site allows customers to browse flowers and bouquets, search by name, filter by type or price, sort results.  
 
@@ -13,6 +13,40 @@ Registered users can manage their profilies, check order history, and edit their
 Administartors can manage products, categories and suppliers.  
 
 
+
+### How to setup the project
+
+**Backend setup**
+
+**Requirements:**
+- Python 3.10+
+- Django 4+
+- Django REST Framework
+- django-rest-framework-simplejwt
+- django-cors-headers
+
+**Clone this repository**
+- git clone https://github.com/urkarnad/flowers-store.git
+- cd flowers-shop
+
+**Create virtual environment**
+- python -m venv venv
+
+*Windows*
+- venv\Scripts\activate
+
+*Mac/Linux*
+- source venv/bin/activate
+
+**Install the requirements**
+- pip install -r requirements.txt
+
+**Database migrations**
+- python manage.py makemigrations
+- python manage.py migrate
+
+**Starting the server**
+- python manage.py runserver
 
 ## API Endpoints  
  
@@ -122,7 +156,7 @@ Ex.:
     Response: `200 OK`, `{ "items":[ { "flower":"Tulip", "quantity":2, "price":50 } ], "total":100 }`  
 
 
-**POST /api/v1/cart** *(authorized users only)*  
+**POST /api/v1/cart_item** *(authorized users only)*  
 
 Add a flower to cart.  
 
@@ -138,34 +172,9 @@ Ex.:
 Remove flower from cart.  
 
 
-
-
-### Orders  
-
-**POST /api/v1/orders** *(authorized users only)*  
-
-Create an order from the cart.  
-
-Ex.:  
-
-    Response: `201 Created`, `{ "order_id":5, "status":"confirmed" }`  
-
-
-**GET /api/v1/orders** *(authorized users only)*  
-
-List all orders of the logged-in user.  
-
-
-**GET /api/v1/orders/{id}** *(authorized users only)*  
-
-Get details of a specific order.  
-
-
-
-
 ### Users  
 
-**POST /api/v1/register**  
+**POST /api/v1/users/signup/**  
 
 Register a new user.  
 
@@ -175,21 +184,32 @@ Ex.:
     Response: `201 Created`  
 
 
-**POST /api/v1/login**  
+**POST /api/v1/users/login**  
 
-Log in ang get authentication token.  
+Log in ang get authentication token.
 
+Ex.:
 
-**GET /api/v1/profile** *(authorized users only)*  
+Body:
 
-Get user profile.  
+{
 
+    "username": "daria",
 
-**PUT /api/v1/profile** *(authorized users only)*  
+    "password": "VeryStrongPassword1"
+}
 
-Update profile data.  
+Response:
 
+{
 
+    "message": "Login success",
+    "username": "daria",
+    "tokens": {
+        "refresh": "eyJhbGciOiJIUzA...",
+        "access": "eyJhbGciOiJIUz..."
+    }
+}
 
 
 ### Information  
